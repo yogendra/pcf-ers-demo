@@ -1,5 +1,6 @@
 package io.pivotal.pcf.sme.ers.server.repo;
 
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,7 +17,7 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Long> {
 	//Page<Attendee> findAll(Pageable pageable);
 
     @RestResource(exported = false)
-    Attendee findById(Long id);
+    Optional<Attendee> findById(Long id);
 
     @RestResource(path = "name", rel = "name")
     Page<Attendee> findByFirstNameIgnoreCase(@Param("q") String firstName, Pageable pageable);
