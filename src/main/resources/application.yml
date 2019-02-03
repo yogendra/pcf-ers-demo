@@ -15,8 +15,14 @@ spring:
 # we can do features of Cloud Foundry without having to explain
 # spring security
 management:
-  security:
-    enabled: false
+  endpoints:
+    jmx:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
   info:
     git:
       mode: full
