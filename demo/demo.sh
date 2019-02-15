@@ -77,9 +77,15 @@ function demo(){
 
   pe "open https://$APP_URL/basics"
 
+
   # Create service
 
   pe "cf marketplace"
+
+  tmux \
+    kill-pane -t 1 \; \
+    kill-pane -t 1
+    
   pe "cf create-service $DB_SERVICE $DB_PLAN $DB_NAME"
 
   echo Waiting to check the service is created succesful
@@ -113,7 +119,7 @@ EOF
   
   APPV2_URL=$(cf app attendees-v2 | grep routes | grep $PCF_DOMAIN | awk {'print $2'} | head -1  )
   APPV2_HOSTNAME=$(echo $APPV2_URL | sed "s/.$PCF_DOMAIN//")
-  
+
   pe "cf bind-service $APPV2_NAME $DB_NAME"
 
   pe "cf start $APPV2_NAME"
@@ -145,6 +151,8 @@ EOF
 EOF
 
   pw "cf scale $APP_NAME -i 1"
+  cf delete -f -r attendees
+  cf delete-service attendees-db
 
 }
 
