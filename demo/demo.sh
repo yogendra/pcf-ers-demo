@@ -110,7 +110,9 @@ EOF
   pe "open https://$APP_URL/bluegreen"
 
   pe "cf push $APPV2_NAME -p $APPV2_JAR -m 768M --hostname $APPV2_HOSTNAME --no-start"
-
+  
+  APPV2_URL=$(cf app attendees-v2 | grep routes | grep $PCF_DOMAIN | awk {'print $2'} | head -1  )
+  
   pe "cf bind-service $APPV2_NAME $DB_NAME"
 
   pe "cf start $APPV2_NAME"
