@@ -15,6 +15,10 @@ COURSE_HOME=$(cd $SCRIPT_DIR/..; pwd)
 
 . $SCRIPT_DIR/demo-magic.sh
 
+if ! cf target 
+then 
+  exit 1
+fi
 
 PCF_DOMAIN=$(cf domains | grep shared | grep -v "tcp\|internal" | awk {'print $1'})
 if [[ ! -f "$SCRIPT_DIR/$PCF_DOMAIN.env" ]]
