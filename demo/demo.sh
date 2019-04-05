@@ -20,7 +20,7 @@ then
   exit 1
 fi
 
-PCF_DOMAIN=$(cf domains | grep shared | grep -v "tcp\|internal" | awk {'print $1'})
+PCF_DOMAIN=$(cf domains | grep shared | grep -v "tcp\|internal" |head -1 | awk {'print $1'})
 if [[ ! -f "$SCRIPT_DIR/$PCF_DOMAIN.env" ]]
 then
   echo "No environment file for $PCF_DOMAIN."
