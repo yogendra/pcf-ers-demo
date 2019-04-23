@@ -158,7 +158,7 @@ EOF
 
 
 function app-details(){
-  watch -n 0.5 cf app $APP_NAME
+  watch -n 0.5 --color cf app $APP_NAME
 
 }
 function logs(){
