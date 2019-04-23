@@ -136,7 +136,7 @@ EOF
 
   pe "cf app $APPV2_NAME"
 
-  pe "cf unmap-route $APPV2_NAME $PCF_DOMAIN -n $APPV2_NAME"
+  pe "cf unmap-route $APPV2_NAME $PCF_DOMAIN -n $APPV2_HOSTNAME"
 
   pe "cf delete $APP_NAME"
 
@@ -150,9 +150,9 @@ EOF
   Thats it. Done.
 EOF
 
-  pw "cf scale $APP_NAME -i 1"
+  pe "cf scale $APP_NAME -i 1"
   cf delete -f -r attendees
-  cf delete-service attendees-db
+  cf delete-service -f attendees-db
 
 }
 
