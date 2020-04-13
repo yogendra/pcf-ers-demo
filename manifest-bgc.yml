@@ -1,13 +1,16 @@
 ---
 applications:
 - name: attendees
-  memory: 768M
-  instances: 1
-  random-route: true
+  memory: 1G
+  instances: 2
+  routes: 
+  - route: ((app_host)).((domain))
   path: target/pcf-ers-demo-1.0-SNAPSHOT.jar
   buildpacks: 
   - java_buildpack_offline
-  services: []
+  services:
+  - autoscale-demo
+  - attendees-db
   env:
     SPRING_PROFILES_ACTIVE: cloud
     JBP_CONFIG_OPEN_JDK_JRE: '{ jre: { version: 11.+ }, memory_calculator: { stack_threads: 25 } }'
